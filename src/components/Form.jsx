@@ -1,11 +1,35 @@
+import { useState } from "react";
 import { Select } from "../utils/Fields";
 import SelectMuscles from "./SelectMuscles";
 
 export default function Form () {
+    const [errors, setErrors] = useState()
+    const [formData, setFormData] = useState({
+        exp: '',
+        nbfois: '',
+        tpsmax: '',
+        muscles: {},
+    })
 
-    return <form>
+    const checkForm = () => {
+        const nb_peu = Object.values(formData.muscles).filter(o => o === 'peu').length
+        const nb_eleve = Object.values(formData.muscles).filter(o => o === 'eleve').length
+        if (nb_peu !== nb_eleve) {
+            setErrors('Veuillez sélectionner autant de muscles en priorité faible que en priorité élevée')
+            return
+        }
+        setErrors()
+        console.log(formData)
+    }
 
-        <Select name="experience" options={{
+    const submit = (e) => {
+        e.preventDefault()
+        checkForm()
+    }
+
+    return <form onSubmit={(e) => submit(e)}>
+
+        <Select name="exp" options={{
             "2": "Moins de 2 ans",
             "2-4": "Entre 2 et 4 ans",
             "4": "Plus de 4 ans",
@@ -29,8 +53,8 @@ export default function Form () {
         }}>
             Combien de temps max peux-tu accorder à tes séances ?
         </Select>
-
-        <SelectMuscles muscles={[    
+        
+        <SelectMuscles name="muscles" formData={formData} setFormData={setFormData} muscles={[    
             'épaules',
             'pecs',
             'trapèzes',
@@ -44,5 +68,9 @@ export default function Form () {
             'mollets',
         ]}/>
 
+        <button onClick={() => console.log(formData)}>log</button>
+
+        { errors && <p className="alert alert-danger">{errors}</p>}
+        <button type='submit' className="btn btn-secondary">Télécharger</button>
     </form>
 }
