@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Select } from "../utils/Fields";
 import SelectMuscles from "./SelectMuscles";
 
-export default function Form ({generateCSV}) {
+export default function Form ({download}) {
     const [errors, setErrors] = useState()
     const [formData, setFormData] = useState({
         exp: '1',
@@ -25,7 +25,7 @@ export default function Form ({generateCSV}) {
     const submit = (e) => {
         e.preventDefault()
         if (checkForm()) {
-            generateCSV(formData)
+            download(formData)
         }
     }
 
@@ -77,6 +77,6 @@ export default function Form ({generateCSV}) {
         <button onClick={() => console.log(formData)}>log</button>
 
         { errors && <p className="alert alert-danger">{errors}</p>}
-        <button type='submit' className="btn btn-secondary">Télécharger</button>
+        <button type='submit' className="btn btn-secondary">Générer le programme</button>
     </form>
 }
