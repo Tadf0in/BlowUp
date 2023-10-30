@@ -1,7 +1,9 @@
+import Form from './components/Form'
 import './main.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
-  return <h1>App</h1>
+  return <Form/>
 }
 
 export default App
