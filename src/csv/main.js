@@ -15,5 +15,5 @@ export default function generateCSV (formData, setCSV) {
     csv_a.download = 'Programme.csv'
     // csv_a.click()
 
-    console.log('click')
+    console.log('click', csv)
   }

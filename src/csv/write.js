@@ -1,16 +1,14 @@
 export default function write (data) {
+    let csv = ''
 
-    console.log(data, data.nb_seance_par_sem)
-
-    let csv = 'Exercice;Vidéo;Fourchette de répétitions;Répétitions;Charge;RIR;Note/feedback\n'
-
-    for (let i ; i < data.nb_seance_par_sem ; i++) {
-        console.log(i)
+    for (let i=1 ; i <= data.nb_seance_par_sem ; i++) {
+        csv += `;;;Séance ${i};;;\n`
+        csv += 'Exercice;Vidéo;Séries;Fourchette de répétitions;Répétitions;Charge;RIR;Note/feedback\n'
+        for (let j=1 ; j <= data.nb_exo ; j++) {
+            csv += `Exo ${j};;${data.nb_series};;;;\n`
+        }
+        csv += ';;;;;;\n'
     }
 
-    // for (const row of data) {  
-    //   csv += row.join(';')
-    //   csv += "\n" 
-    // }
     return csv
 }
