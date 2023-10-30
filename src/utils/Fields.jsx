@@ -9,7 +9,7 @@ export function Select ({name, options, get, set, children}) {
         
         { children && <label htmlFor="name">{children}</label>}
         
-        <select className="form-select" id={name} required
+        <select className="form-select" id={name} required={false}
             value={get} 
             onChange={(e) => set(name, e.target.value)}
         >

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Select } from "../utils/Fields";
 import SelectMuscles from "./SelectMuscles";
 
-export default function Form () {
+export default function Form ({generateCSV}) {
     const [errors, setErrors] = useState()
     const [formData, setFormData] = useState({
-        exp: '2',
+        exp: '1',
         nbfois: '3',
         tpsmax: '30',
         muscles: {},
@@ -16,15 +16,17 @@ export default function Form () {
         const nb_eleve = Object.values(formData.muscles).filter(o => o === 'eleve').length
         if (nb_peu !== nb_eleve) {
             setErrors('Veuillez sélectionner autant de muscles en priorité faible que en priorité élevée')
-            return
+            return false
         }
         setErrors()
-        console.log(formData)
+        return true
     }
 
     const submit = (e) => {
         e.preventDefault()
-        checkForm()
+        if (checkForm()) {
+            generateCSV(formData)
+        }
     }
 
     const change = (name, value) => {
@@ -34,9 +36,9 @@ export default function Form () {
     return <form onSubmit={(e) => submit(e)}>
 
         <Select name="exp" get={formData["exp"]} set={change} options={{
-            "2": "Moins de 2 ans",
-            "2-4": "Entre 2 et 4 ans",
-            "4": "Plus de 4 ans",
+            "1": "Moins de 2 ans",
+            "3": "Entre 2 et 4 ans",
+            "5": "Plus de 4 ans",
         }}>
             Depuis quand pratiques-tu sérieusement la musculation ?
         </Select>
