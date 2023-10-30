@@ -5,9 +5,9 @@ import SelectMuscles from "./SelectMuscles";
 export default function Form () {
     const [errors, setErrors] = useState()
     const [formData, setFormData] = useState({
-        exp: '',
-        nbfois: '',
-        tpsmax: '',
+        exp: '2',
+        nbfois: '3',
+        tpsmax: '30',
         muscles: {},
     })
 
@@ -27,9 +27,13 @@ export default function Form () {
         checkForm()
     }
 
+    const change = (name, value) => {
+        setFormData({...formData, [name]: value})
+    }
+
     return <form onSubmit={(e) => submit(e)}>
 
-        <Select name="exp" options={{
+        <Select name="exp" get={formData["exp"]} set={change} options={{
             "2": "Moins de 2 ans",
             "2-4": "Entre 2 et 4 ans",
             "4": "Plus de 4 ans",
@@ -37,7 +41,7 @@ export default function Form () {
             Depuis quand pratiques-tu sérieusement la musculation ?
         </Select>
 
-        <Select name="nbfois" options={{
+        <Select name="nbfois" get={formData["nbfois"]} set={change} options={{
             "3": "3 fois",
             "4": "4 fois",
             "5": "5 fois",
@@ -45,7 +49,7 @@ export default function Form () {
             Combien de fois max tu peux t’entrainer par semaine ?
         </Select>
 
-        <Select name="tpsmax" options={{
+        <Select name="tpsmax" get={formData["tpsmax"]} set={change} options={{
             "30": "30 min",
             "45": "45 min",
             "60": "1 h",
