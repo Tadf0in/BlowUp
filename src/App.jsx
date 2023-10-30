@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import Form from './components/Form'
 import './main.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   const [csv, setCSV] = useState()
@@ -32,6 +34,7 @@ function App() {
   return <>
     {csv}
     <button onClick={download}>Télécharger</button>
+    <Form/>
   </>
 }
 
