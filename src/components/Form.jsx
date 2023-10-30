@@ -1,4 +1,5 @@
 import { Select } from "../utils/Fields";
+import SelectMuscles from "./SelectMuscles";
 
 export default function Form () {
 
@@ -28,6 +29,20 @@ export default function Form () {
         }}>
             Combien de temps max peux-tu accorder à tes séances ?
         </Select>
+
+        <SelectMuscles muscles={[    
+            'épaules',
+            'pecs',
+            'trapèzes',
+            'dorsaux',
+            'abdos',
+            'biceps',
+            'triceps',
+            'fessiers',
+            'quadriceps',
+            'ischios jambiers',
+            'mollets',
+        ]}/>
 
     </form>
 }

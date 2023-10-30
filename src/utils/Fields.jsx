@@ -6,10 +6,10 @@ export default function Input ({text, placeholder, name, get, set}) {
 
 export function Select ({name, options, get, set, children}) {
     return <span className="question">
-        <label htmlFor="name">{children}</label>
-        <select className="form-select" id={name}>
+        { children && <label htmlFor="name">{children}</label>}
+        <select className="form-select" id={name} required>
             { Object.keys(options).map((o, i) => 
-                <option value={o} key={i}>{options[o]}</option>)
+                <option disabled={o === ''} value={o} key={i}>{options[o]}</option>)
             }
         </select>
     </span>
